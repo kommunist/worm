@@ -18,6 +18,7 @@ class Worm
     @cells.each(&:step)
     if equal_place(@cells.first, eat)
       add_cell
+      remove_eat(eat)
       true
     else
       false
@@ -48,5 +49,9 @@ class Worm
 
   def equal_place(first_cell, second_cell)
     first_cell.row == second_cell.row && first_cell.column == second_cell.column
+  end
+
+  def remove_eat(cell)
+    @grid.cells.push(DeadCell.new(@window, cell.row, cell.column))
   end
 end

@@ -52,7 +52,7 @@ class Field < Gosu::Window
   private
 
   def eat
-    @eat ||= EatCell.new(self, rand(0..10), rand(0..10))
+    @eat ||= EatCell.new(self, rand(0...@grid.rows), rand(0...@grid.columns))
     @grid.cells.push(@eat)
     @eat
   end
