@@ -7,6 +7,6 @@ class EatCell < Gosu::Grid::Cell
   private
 
   def object
-    @object ||= Gosu::Image.new(window, 'assets/live_cell.png', true)
+    @object ||= Gosu::Image.new(window, 'assets/eat_cell.png', true)
   end
 end
