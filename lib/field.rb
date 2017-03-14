@@ -17,9 +17,10 @@ class Field < Gosu::Window
     @grid = Gosu::Grid.new(self)
     @grid.default_cell = DeadCell.new(self, 0, 0)
 
-    @worm = Worm.new(self, @grid, LiveCell.new(self, 2, 8))
+    @worm = Worm.new(self, @grid)
 
     @grid.cells.push(*@worm.cells)
+    @direction = 'right'
   end
 
   def needs_cursor?
@@ -36,11 +37,13 @@ class Field < Gosu::Window
       when button_down?(Gosu::KbUp)
         'up'
       when button_down?(Gosu::KbRight)
-        @worm.add_cell
         'right'
       else
         @direction
       end
+    if button_down?(Gosu::KbE)
+      @worm.add_cell
+    end
     @worm.step(@direction)
   end
 
