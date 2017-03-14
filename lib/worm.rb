@@ -9,14 +9,22 @@ class Worm
   end
 
   # worm make one step
-  def step(new_direction = @cells.first.direction)
+  def step(new_direction = @cells.first.direction, eat)
     @cells.each do |cell|
       old_direction = cell.direction
       cell.direction = new_direction
       new_direction = old_direction
     end
     @cells.each(&:step)
+    if equal_place(@cells.first, eat)
+      add_cell
+      true
+    else
+      false
+    end
   end
+
+  private
 
   def add_cell
     last_cell = @cells.last
@@ -36,5 +44,9 @@ class Worm
     end
     @cells << new_cell
     @grid.cells.push(*cells)
+  end
+
+  def equal_place(first_cell, second_cell)
+    first_cell.row == second_cell.row && first_cell.column == second_cell.column
   end
 end

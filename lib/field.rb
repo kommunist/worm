@@ -1,6 +1,7 @@
 require 'gosu/all'
 require_relative 'dead_cell'
 require_relative 'live_cell'
+require_relative 'eat_cell'
 require_relative 'worm'
 
 
@@ -12,7 +13,7 @@ class Field < Gosu::Window
   def initialize
     super(540, 325, false)
 
-    self.caption = "Gosu Grid"
+    self.caption = "Worm"
 
     @grid = Gosu::Grid.new(self)
     @grid.default_cell = DeadCell.new(self, 0, 0)
@@ -41,13 +42,18 @@ class Field < Gosu::Window
       else
         @direction
       end
-    if button_down?(Gosu::KbE)
-      @worm.add_cell
-    end
-    @worm.step(@direction)
+    @eat = nil if @worm.step(@direction, eat)
   end
 
   def draw
     @grid.draw && sleep(0.05)
+  end
+
+  private
+
+  def eat
+    @eat ||= EatCell.new(self, rand(0..10), rand(0..10))
+    @grid.cells.push(@eat)
+    @eat
   end
 end
