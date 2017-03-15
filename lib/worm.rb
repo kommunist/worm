@@ -16,6 +16,7 @@ class Worm
       new_direction = old_direction
     end
     @cells.each(&:step)
+    check_border
     if equal_place(@cells.first, eat)
       add_cell
       remove_eat(eat)
@@ -53,5 +54,10 @@ class Worm
 
   def remove_eat(cell)
     @grid.cells.push(DeadCell.new(@window, cell.row, cell.column))
+  end
+
+  def check_border
+    fail if @cells.first.row >= @grid.rows || @cells.first.row < 0 ||
+      @cells.first.column >= @grid.columns || @cells.first.column < 0
   end
 end
