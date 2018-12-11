@@ -1,6 +1,6 @@
 GEM
   specs:
-    gosu (0.12.1)
+    gosu (0.14.4)
     gosu_grid (0.0.1)
       gosu
 
@@ -12,4 +12,4 @@ DEPENDENCIES
   gosu_grid
 
 BUNDLED WITH
-   1.15.0
+   1.16.6
